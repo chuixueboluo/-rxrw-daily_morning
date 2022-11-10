@@ -68,7 +68,7 @@ def get_morning_msg():
     ret = ret.content.decode('utf8').replace("'", '"')
     data_json = json.loads(ret)
     msg = data_json['newslist'][-1]['content']
-    print(msg)
+    print(msg.type())
     return msg
 
 client = WeChatClient(app_id, app_secret)
