@@ -34,7 +34,7 @@ def get_date():
     week="星期六"
   elif datetime.now().weekday()==6:
     week="星期日"
-  datetime.now.weekday()+1
+  datetime.now().weekday()+1
   return today.strftime('%Y-%m-%d')+" "+week
 
 def get_weather():
