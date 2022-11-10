@@ -15,8 +15,26 @@ app_id = os.environ["APP_ID"]
 app_secret = os.environ["APP_SECRET"]
 
 user_id = os.environ["USER_ID"]
-template_id = os.environ["TEMPLATE_ID"]
+morning_template_id = os.environ["MORNING_TPID"]
 
+get_date():
+  week=""
+  if datetime.now.weekday()==0:
+    week="星期一"
+  elif datetime.now.weekday()==1:
+    week="星期二"
+  elif datetime.now.weekday()==2:
+    week="星期三"
+  elif datetime.now.weekday()==3:
+    week="星期四"
+  elif datetime.now.weekday()==4:
+    week="星期五"
+  elif datetime.now.weekday()==5:
+    week="星期六"
+  elif datetime.now.weekday()==6:
+    week="星期日"
+  datetime.now.weekday()+1
+  return today.strftime('%Y-%m-%d')+" "+week
 
 def get_weather():
   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
@@ -43,11 +61,19 @@ def get_words():
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
 
+def get_morning_msg():
+    url = f"http://api.tianapi.com/zaoan/index?key=8aed16381cecc47f036d997cdf04ba1c"
+    ret = requests.get(url)
+    ret = ret.content.decode('utf8').replace("'", '"')
+    data_json = json.loads(ret)
+    msg = data_json['newslist'][-1]['content']
+    print(msg)
+    return msg
 
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
 wea, temperature = get_weather()
-data = {"weather":{"value":wea,"color":"#173177"},"temperature":{"value":temperature},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()}}
+data = {"date_date":{"value":get_date,"color":get_random_color()},"zaoan":{"value":get_morning_msg(),"color":get_random_color()},"weather":{"value":wea,"color":get_random_color()},"temp":{"value":temperature,"color":get_random_color()},"meet_days":{"value":get_count()},"birthday_left":{"value":get_birthday()}}
 res = wm.send_template(user_id, template_id, data)
 print(res)
