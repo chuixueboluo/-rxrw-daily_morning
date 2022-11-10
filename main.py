@@ -17,7 +17,7 @@ app_secret = os.environ["APP_SECRET"]
 user_id = os.environ["USER_ID"]
 morning_template_id = os.environ["MORNING_TPID"]
 
-get_date():
+def get_date():
   week=""
   if datetime.now.weekday()==0:
     week="星期一"
