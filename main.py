@@ -20,19 +20,19 @@ morning_template_id = os.environ["MORNING_TPID"]
 
 def get_date():
   week=""
-  if datetime.now.weekday()==0:
+  if datetime.now().weekday()==0:
     week="星期一"
-  elif datetime.now.weekday()==1:
+  elif datetime.now().weekday()==1:
     week="星期二"
-  elif datetime.now.weekday()==2:
+  elif datetime.now().weekday()==2:
     week="星期三"
-  elif datetime.now.weekday()==3:
+  elif datetime.now().weekday()==3:
     week="星期四"
-  elif datetime.now.weekday()==4:
+  elif datetime.now().weekday()==4:
     week="星期五"
-  elif datetime.now.weekday()==5:
+  elif datetime.now().weekday()==5:
     week="星期六"
-  elif datetime.now.weekday()==6:
+  elif datetime.now().weekday()==6:
     week="星期日"
   datetime.now.weekday()+1
   return today.strftime('%Y-%m-%d')+" "+week
